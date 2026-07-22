@@ -44,7 +44,7 @@ COPY --chmod=755 crontab startup.sh .
 # cron не видит переменные окружения, переданные главному процессу, точнее
 # он начинает новую сессию, где тот же $CONFIG_DIR пуст
 CMD printenv | grep -E 'CONFIG_DIR|HH_PROFILE_ID' >> /etc/environment && \
-    chown -R docker:docker ./config && \
+    chown -R docker:docker ./config; \
     dos2unix -n ./crontab /tmp/crontab && \
     dos2unix -n ./apply.sh /tmp/apply.sh && \
     crontab -u docker /tmp/crontab && \
